@@ -85,10 +85,9 @@ export function calculateEMI(principal, monthlyRate, emi) {
       totalPaid += emi;
     }
   }
-
   return {
     months,
-    totalPaid,
-    totalInterest
+    totalPaid: Math.round(totalPaid * 100) / 100,
+    totalInterest: Math.round(totalInterest * 100) / 100
   };
 }
