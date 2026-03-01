@@ -31,4 +31,20 @@
  */
 export function sabziMandiBill(shoppingList, priceList) {
   // Your code here
+  let items = [];
+  let totalBill= 0;
+  for(let element of shoppingList){
+
+
+    if(!(element.name in priceList)){
+      continue;
+    }
+    let pricePerKG = element.qty * priceList[element.name]
+    if(priceList[element.name]>80){
+      continue;
+    }
+    items.push({name : element.name , qty : element.qty , cost : pricePerKG})
+    totalBill += pricePerKG;
+  }
+  return { items, totalBill };
 }

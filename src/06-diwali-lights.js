@@ -38,5 +38,46 @@
  *   // => { selected: [{ color: "golden", length: 5, cost: 250 }], totalLength: 5, totalCost: 250 }
  */
 export function diwaliLightsPlan(lightStrings, budget) {
-  // Your code here
+
+
+  if(!Array.isArray(lightStrings) ||  typeof budget !== "number" ||
+  budget <= 0 || Number.isNaN(budget))   return { selected: [], totalLength: 0, totalCost: 0 }
+
+  let totalCost = 0;
+  let totalLength = 0 ;
+  let selected = []
+
+  for( let element of lightStrings){
+    if (element.color === 'golden'){
+      totalCost += (element.length * 50)
+      totalLength += element.length
+      selected.push({color : element.color , length : element.length , cost : (element.length*50)})
+    } else if (element.color === 'multicolor'){
+      totalCost += (element.length * 40)
+      totalLength += element.length
+      selected.push({color : element.color , length : element.length , cost : (element.length*40)})
+
+
+    } else if (element.color === 'white'){
+      totalCost += (element.length * 30)
+      totalLength += element.length
+      selected.push({color : element.color , length : element.length , cost : (element.length*30)})
+
+
+    } else {
+      totalCost += (element.length * 35)
+      totalLength += element.length
+      selected.push({color : element.color , length : element.length , cost : (element.length*35)})
+    }
+  }
+
+  let i = lightStrings.length -1;
+  while(budget<totalCost){
+    let removed = selected.pop()
+    totalCost -= removed.cost
+    totalLength -= removed.length;
+  }
+
+
+  return {selected: selected, totalLength: totalLength, totalCost: totalCost}
 }

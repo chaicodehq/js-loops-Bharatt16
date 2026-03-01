@@ -28,4 +28,32 @@
  */
 export function chaiTapriRevenue(customers) {
   // Your code here
+  if (
+    customers <= 0 ||
+    typeof customers === "string" ||
+    Number.isNaN(customers) ||
+    !Number.isInteger(customers)
+  ) {
+    return { totalChai: 0, totalRevenue: 0 };
+  }
+  let totalChai = 0;
+  let totalRevenue = 0;
+  let a = customers;
+  let cuttingChai=0, adrakChai=0;
+  while (a > 0) {
+    if (a < 3) {
+      cuttingChai++;
+    } else {
+      if (a % 3 === 0) {
+        adrakChai++;
+      } else {
+        cuttingChai++;
+      }
+    }
+    a--;
+  }
+
+  totalRevenue = (cuttingChai*10) + (adrakChai*15)
+
+  return { totalChai: customers, totalRevenue: totalRevenue };
 }
